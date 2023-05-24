@@ -97,10 +97,22 @@ import { FormEvent, useEffect, useState } from "react";
 import { Task } from "../shared/Task";
 import ably from "ably/promises";
 import { AblySubscriptionClient } from "remult/ably";
+import { InferGetServerSidePropsType } from "next";
+import remultApi from "./api/[...remult]";
 
 const taskRepo = remult.repo(Task);
 
-export default function Home() {
+export const getServerSideProps = remultApi.getServerSideProps(async (req) => {
+  return {
+    props: {
+      tasks: taskRepo.metadata.apiReadAllowed ? await fetchTasks() : [],
+    },
+  };
+});
+
+export default function Home(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
+) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const session = useSession();
@@ -199,4 +211,7 @@ export default function Home() {
       </main>
     </div>
   );
+}
+function fetchTasks(): any {
+  throw new Error("Function not implemented.");
 }
