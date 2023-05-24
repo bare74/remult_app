@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "Clean car",
+    "completed": false
+  },
+  {
+    "id": 2,
+    "title": "Read a book",
+    "completed": false
+  },
+  {
+    "id": 3,
+    "title": "Take a nap",
+    "completed": false
+  },
+  {
+    "id": "b107f577-96b3-4747-aca4-f556804abcd7",
+    "title": "Bjørn",
+    "completed": false
+  },
+  {
+    "id": "64fc44aa-51c8-46ac-acc7-83e910a259d6",
+    "title": "Bjørn ARE",
+    "completed": false
+  },
+  {
+    "id": "79e32e4a-7015-4d8b-8c55-d36efcea8989",
+    "title": "Bjørn Nielsen",
+    "completed": false
+  },
+  {
+    "id": "7dc35f2f-3256-44e3-9cf4-c97086a95898",
+    "title": "DAG HAUGEN",
+    "completed": false
+  },
+  {
+    "id": "b1489c5c-56a0-473f-b0bf-bca8410ea7e1",
+    "title": "Bjørn",
+    "completed": false
+  }
+]

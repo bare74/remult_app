@@ -1,114 +1,202 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+// import { remult, UserInfo } from "remult";
+// import { signIn, signOut, useSession } from "next-auth/react";
+// import { FormEvent, useEffect, useState } from "react";
+// import { Task } from "../shared/Task";
 
-const inter = Inter({ subsets: ['latin'] })
+// const taskRepo = remult.repo(Task);
+
+// export default function Home() {
+//   const [tasks, setTasks] = useState<Task[]>([]);
+//   const [newTaskTitle, setNewTaskTitle] = useState("");
+//   const session = useSession();
+
+//   const addTask = async (e: FormEvent) => {
+//     e.preventDefault();
+//     try {
+//       const newTask = await taskRepo.insert({ title: newTaskTitle });
+//       setTasks([...tasks, newTask]);
+//       setNewTaskTitle("");
+//     } catch (error: any) {
+//       alert(error.message);
+//     }
+//   };
+
+//   useEffect(() => {
+//     remult.user = session.data?.user as UserInfo;
+//     if (session.status === "unauthenticated") signIn();
+//     else if (session.status === "authenticated")
+//       return taskRepo
+//         .liveQuery({
+//           limit: 20,
+//           orderBy: { completed: "asc" },
+//         })
+//         .subscribe((info) => setTasks(info.applyChanges));
+//   }, [session]);
+//   if (session.status !== "authenticated") return <></>;
+//   return (
+//     <div>
+//       <h1>Todos</h1>
+//       <div>
+//         Hello {remult.user?.name}
+//         <button onClick={() => signOut()}>Sign Out</button>
+//       </div>
+//       <main>
+//         {taskRepo.metadata.apiInsertAllowed() && (
+//           <form onSubmit={addTask}>
+//             <input
+//               value={newTaskTitle}
+//               placeholder="What needs to be done?"
+//               onChange={(e) => setNewTaskTitle(e.target.value)}
+//             />
+//             <button>Add</button>
+//           </form>
+//         )}
+
+//         {tasks.map((task) => {
+//           const setTask = (value: Task) =>
+//             setTasks((tasks) => tasks.map((t) => (t === task ? value : t)));
+
+//           const setTitle = (title: string) => setTask({ ...task, title });
+
+//           const saveTask = async () => {
+//             try {
+//               await taskRepo.save(task);
+//             } catch (error: any) {
+//               alert(error.message);
+//             }
+//           };
+
+//           const deleteTask = async () => {
+//             try {
+//               await taskRepo.delete(task);
+//             } catch (error: any) {
+//               alert(error.message);
+//             }
+//           };
+
+//           return (
+//             <div key={task.id}>
+//               <input
+//                 value={task.title}
+//                 onChange={(e) => setTitle(e.target.value)}
+//               />
+//               <button onClick={saveTask}>Save</button>
+//               {taskRepo.metadata.apiDeleteAllowed(task) && (
+//                 <button onClick={deleteTask}>Delete</button>
+//               )}
+//             </div>
+//           );
+//         })}
+//       </main>
+//     </div>
+//   );
+// }
+import { remult, UserInfo } from "remult";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { FormEvent, useEffect, useState } from "react";
+import { Task } from "../shared/Task";
+import ably from "ably/promises";
+import { AblySubscriptionClient } from "remult/ably";
+
+const taskRepo = remult.repo(Task);
 
 export default function Home() {
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [newTaskTitle, setNewTaskTitle] = useState("");
+  const session = useSession();
+
+  const addTask = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      const newTask = await taskRepo.insert({ title: newTaskTitle });
+      setTasks([...tasks, newTask]);
+      setNewTaskTitle("");
+    } catch (error: any) {
+      alert(error.message);
+    }
+  };
+
+  const setTitle = (task: Task, title: string) => {
+    const updatedTasks = tasks.map((t) => {
+      if (t === task) {
+        return { ...t, title: title };
+      }
+      return t;
+    });
+    setTasks(updatedTasks);
+  };
+
+  const saveTask = async (task: Task) => {
+    try {
+      await taskRepo.update(task.id, { ...task });
+    } catch (error: any) {
+      alert(error.message);
+    }
+  };
+
+  useEffect(() => {
+    remult.apiClient.subscriptionClient = new AblySubscriptionClient(
+      new ably.Realtime({ authUrl: "/api/getAblyToken" })
+    );
+  }, []);
+
+  useEffect(() => {
+    remult.user = session.data?.user as UserInfo;
+    if (session.status === "unauthenticated") signIn();
+    else if (session.status === "authenticated")
+      return taskRepo
+        .liveQuery({
+          limit: 20,
+          orderBy: { completed: "asc" },
+          // where: { completed: true },
+        })
+        .subscribe((info) => setTasks(info.applyChanges));
+  }, [session]);
+
+  if (session.status !== "authenticated") return <></>;
+
   return (
-    <>
-      <Head>
-        <title>Create Next App</title>
-        <meta name="description" content="Generated by create next app" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>src/pages/index.tsx</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
+    <div>
+      <h1>Todos</h1>
+      <div>
+        Hello {remult.user?.name}
+        <button onClick={() => signOut()}>Sign Out</button>
+      </div>
+      <main>
+        {taskRepo.metadata.apiInsertAllowed() && (
+          <form onSubmit={addTask}>
+            <input
+              value={newTaskTitle}
+              placeholder="What needs to be done?"
+              onChange={(e) => setNewTaskTitle(e.target.value)}
+            />
+            <button>Add</button>
+          </form>
+        )}
+
+        {tasks.map((task) => {
+          const deleteTask = async () => {
+            try {
+              await taskRepo.delete(task);
+            } catch (error: any) {
+              alert(error.message);
+            }
+          };
+
+          return (
+            <div key={task.id}>
+              <input
+                value={task.title}
+                onChange={(e) => setTitle(task, e.target.value)}
               />
-            </a>
-          </div>
-        </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
+              <button onClick={() => saveTask(task)}>Save</button>
+              {taskRepo.metadata.apiDeleteAllowed(task) && (
+                <button onClick={deleteTask}>Delete</button>
+              )}
+            </div>
+          );
+        })}
       </main>
-    </>
-  )
+    </div>
+  );
 }
