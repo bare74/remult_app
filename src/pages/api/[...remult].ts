@@ -7,6 +7,7 @@ import { DataProviderLiveQueryStorage } from "remult/server";
 
 import { Task } from "../../shared/Task";
 import { createPostgresConnection } from "remult/postgres";
+import { TasksController } from "@/shared/TasksController";
 
 const dataProvider = createPostgresConnection();
 export default remultNext({
@@ -20,5 +21,5 @@ export default remultNext({
 
 export const api = remultNext({
   entities: [Task],
-  //   controllers: [TasksController],
+  controllers: [TasksController],
 });

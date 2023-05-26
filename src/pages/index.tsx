@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { Task } from "../shared/Task";
 import ably from "ably/promises";
 import { AblySubscriptionClient } from "remult/ably";
+import { TasksController } from "@/shared/TasksController";
 
 const taskRepo = remult.repo(Task);
 
@@ -21,6 +22,10 @@ export default function Home() {
     } catch (error: any) {
       alert(error.message);
     }
+  };
+
+  const setAllCompleted = async (completed: boolean) => {
+    await TasksController.setAllCompleted(completed);
   };
 
   useEffect(() => {
@@ -64,6 +69,10 @@ export default function Home() {
           const setTask = (value: Task) =>
             setTasks((tasks) => tasks.map((t) => (t === task ? value : t)));
 
+          const setCompleted = async (completed: boolean) =>
+            // setTask(await taskRepo.save({ ...task, completed }));
+            await taskRepo.save({ ...task, completed });
+
           const setTitle = (title: string) => setTask({ ...task, title });
 
           const saveTask = async () => {
@@ -83,6 +92,11 @@ export default function Home() {
           return (
             <div key={task.id}>
               <input
+                type="checkbox"
+                checked={task.completed}
+                onChange={(e) => setCompleted(e.target.checked)}
+              />
+              <input
                 value={task.title}
                 onChange={(e) => setTitle(e.target.value)}
               />
@@ -93,6 +107,14 @@ export default function Home() {
             </div>
           );
         })}
+        <div>
+          <button onClick={() => setAllCompleted(true)}>
+            Set All Completed
+          </button>
+          <button onClick={() => setAllCompleted(false)}>
+            Set All Uncompleted
+          </button>
+        </div>
       </main>
     </div>
   );
