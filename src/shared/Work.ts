@@ -11,11 +11,14 @@ export class Work {
 
   @Fields.string({
     validate: (work) => {
-      if (work.name.length < 3) throw "Too Short";
+      if (work.title.length < 3) throw "Too Short";
     },
     allowApiUpdate: "admin",
   })
-  name = "";
+  title = "";
+
+  @Fields.string()
+  workPlace = "";
 
   @Fields.string()
   text = "";
