@@ -1,33 +1,3 @@
-// import NextAuth from "next-auth";
-// import Credentials from "next-auth/providers/credentials";
-// import { UserInfo } from "remult";
-
-// const validUsers: UserInfo[] = [
-//   { id: "1", name: "bjornarenielsen@yahoo.no", roles: ["admin"] },
-// ];
-// export function findUserById(id: string | undefined) {
-//   return validUsers.find((user) => user.id === id);
-// }
-
-// export default NextAuth({
-//   providers: [
-//     Credentials({
-//       credentials: {
-//         name: {
-//           placeholder: "e-mail",
-//         },
-//       },
-//       authorize: (info) =>
-//         validUsers.find((user) => user.name === info?.name) || null,
-//     }),
-//   ],
-//   callbacks: {
-//     session: ({ session, token }) => ({
-//       ...session,
-//       user: findUserById(token?.sub),
-//     }),
-//   },
-// });
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { UserInfo } from "remult";

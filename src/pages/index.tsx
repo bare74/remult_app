@@ -13,6 +13,7 @@ export default function Home() {
   const [newSchoolOccupation, setNewSchoolOccupation] = useState("");
   const [newSchoolFromDate, setNewSchoolFromDate] = useState("");
   const [newSchoolToDate, setNewSchoolToDate] = useState("");
+  const [loading, setLoading] = useState(true); // Add loading state
   const session = useSession();
 
   const addSchool = async (e: FormEvent) => {
@@ -49,11 +50,17 @@ export default function Home() {
         .liveQuery({
           limit: 20,
         })
-        .subscribe((info) => setSchools(info.applyChanges));
+        .subscribe((info) => {
+          setSchools(info.applyChanges);
+          setLoading(false); // Set loading state to false when data is fetched
+        });
   }, [session]);
 
   if (session.status !== "authenticated") return <></>;
 
+  if (loading) {
+    return <div>Loading...</div>; // Display a loading message or spinner
+  }
   return (
     <div>
       <h1>Schools</h1>
