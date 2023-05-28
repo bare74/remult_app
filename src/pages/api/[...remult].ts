@@ -4,10 +4,8 @@ import { AblySubscriptionServer } from "remult/ably";
 import { findUserById } from "./auth/[...nextauth]";
 import { getToken } from "next-auth/jwt";
 import { DataProviderLiveQueryStorage } from "remult/server";
-
-import { Task } from "../../shared/Task";
+import { School } from "../../shared/School";
 import { createPostgresConnection } from "remult/postgres";
-import { TasksController } from "@/shared/TasksController";
 
 const dataProvider = createPostgresConnection();
 export default remultNext({
@@ -20,6 +18,5 @@ export default remultNext({
 });
 
 export const api = remultNext({
-  entities: [Task],
-  controllers: [TasksController],
+  entities: [School],
 });

@@ -1,31 +1,38 @@
 import { remult, UserInfo } from "remult";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { FormEvent, useEffect, useState } from "react";
-import { Task } from "../shared/Task";
+import { School } from "../shared/School";
 import ably from "ably/promises";
 import { AblySubscriptionClient } from "remult/ably";
-import { TasksController } from "@/shared/TasksController";
 
-const taskRepo = remult.repo(Task);
+const schoolRepo = remult.repo(School);
 
 export default function Home() {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [schools, setSchools] = useState<School[]>([]);
+  const [newSchoolName, setNewSchoolName] = useState("");
+  const [newSchoolOccupation, setNewSchoolOccupation] = useState("");
+  const [newSchoolFromDate, setNewSchoolFromDate] = useState("");
+  const [newSchoolToDate, setNewSchoolToDate] = useState("");
   const session = useSession();
 
-  const addTask = async (e: FormEvent) => {
+  const addSchool = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const newTask = await taskRepo.insert({ title: newTaskTitle });
-      //  setTasks([...tasks, newTask]);
-      setNewTaskTitle("");
+      const newSchool = await schoolRepo.insert([
+        {
+          name: newSchoolName,
+          occupation: newSchoolOccupation,
+          fromDate: new Date(newSchoolFromDate),
+          toDate: new Date(newSchoolToDate),
+        },
+      ]);
+      setNewSchoolName("");
+      setNewSchoolOccupation("");
+      setNewSchoolFromDate("");
+      setNewSchoolToDate("");
     } catch (error: any) {
       alert(error.message);
     }
-  };
-
-  const setAllCompleted = async (completed: boolean) => {
-    await TasksController.setAllCompleted(completed);
   };
 
   useEffect(() => {
@@ -38,83 +45,123 @@ export default function Home() {
     remult.user = session.data?.user as UserInfo;
     if (session.status === "unauthenticated") signIn();
     else if (session.status === "authenticated")
-      return taskRepo
+      return schoolRepo
         .liveQuery({
           limit: 20,
-          orderBy: { completed: "asc" },
         })
-        .subscribe((info) => setTasks(info.applyChanges));
+        .subscribe((info) => setSchools(info.applyChanges));
   }, [session]);
+
   if (session.status !== "authenticated") return <></>;
+
   return (
     <div>
-      <h1>Todos</h1>
+      <h1>Schools</h1>
       <main>
         <div>
           Hello {remult.user?.name}
           <button onClick={() => signOut()}>Sign Out</button>
         </div>
 
-        {taskRepo.metadata.apiInsertAllowed() && (
-          <form onSubmit={addTask}>
+        {schoolRepo.metadata.apiInsertAllowed() && (
+          <form onSubmit={addSchool}>
             <input
-              value={newTaskTitle}
-              placeholder="What needs to be done?"
-              onChange={(e) => setNewTaskTitle(e.target.value)}
+              value={newSchoolName}
+              placeholder="School Name"
+              onChange={(e) => setNewSchoolName(e.target.value)}
+            />
+            <input
+              value={newSchoolOccupation}
+              placeholder="Occupation"
+              onChange={(e) => setNewSchoolOccupation(e.target.value)}
+            />
+            <input
+              type="date"
+              value={newSchoolFromDate}
+              onChange={(e) => setNewSchoolFromDate(e.target.value)}
+            />
+            <input
+              type="date"
+              value={newSchoolToDate}
+              onChange={(e) => setNewSchoolToDate(e.target.value)}
             />
             <button>Add</button>
           </form>
         )}
-        {tasks.map((task) => {
-          const setTask = (value: Task) =>
-            setTasks((tasks) => tasks.map((t) => (t === task ? value : t)));
 
-          const setCompleted = async (completed: boolean) =>
-            // setTask(await taskRepo.save({ ...task, completed }));
-            await taskRepo.save({ ...task, completed });
+        {schools.map((school) => {
+          const setSchool = (value: School) =>
+            setSchools((prevSchools) =>
+              prevSchools.map((s) => (s.id === school.id ? value : s))
+            );
 
-          const setTitle = (title: string) => setTask({ ...task, title });
+          const setName = (name: string) => setSchool({ ...school, name });
+          const setOccupation = (occupation: string) =>
+            setSchool({ ...school, occupation });
+          const setFromDate = (fromDate: string) =>
+            setSchool({ ...school, fromDate: new Date(fromDate) });
 
-          const saveTask = async () => {
+          const setToDate = (toDate: string) =>
+            setSchool({ ...school, toDate: new Date(toDate) });
+          const saveSchool = async () => {
             try {
-              await taskRepo.save(task);
+              const { id, name, occupation, fromDate, toDate } = school;
+              const updatedSchool = {
+                id,
+                name,
+                occupation,
+                fromDate,
+                toDate,
+                completed: true, // Add the completed property if it's appropriate for your use case
+              };
+              await schoolRepo.update(id, updatedSchool);
+            } catch (error: any) {
+              console.log("Error saving school:", error.message);
+              alert(error.message);
+            }
+          };
+
+          const deleteSchool = async () => {
+            try {
+              await schoolRepo.delete(school);
             } catch (error: any) {
               alert(error.message);
             }
           };
-          const deleteTask = async () => {
-            try {
-              await taskRepo.delete(task);
-            } catch (error: any) {
-              alert(error.message);
-            }
-          };
+
           return (
-            <div key={task.id}>
+            <div key={school.id}>
               <input
-                type="checkbox"
-                checked={task.completed}
-                onChange={(e) => setCompleted(e.target.checked)}
+                value={school.name}
+                onChange={(e) => setName(e.target.value)}
               />
               <input
-                value={task.title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={school.occupation}
+                onChange={(e) => setOccupation(e.target.value)}
               />
-              <button onClick={saveTask}>Save</button>
-              {taskRepo.metadata.apiDeleteAllowed(task) && (
-                <button onClick={deleteTask}>Delete</button>
+              <input
+                type="date"
+                value={
+                  school.fromDate
+                    ? school.fromDate.toISOString().split("T")[0]
+                    : ""
+                }
+                onChange={(e) => setFromDate(e.target.value)}
+              />
+              <input
+                type="date"
+                value={
+                  school.toDate ? school.toDate.toISOString().split("T")[0] : ""
+                }
+                onChange={(e) => setToDate(e.target.value)}
+              />
+              <button onClick={saveSchool}>Save</button>
+              {schoolRepo.metadata.apiDeleteAllowed(school) && (
+                <button onClick={deleteSchool}>Delete</button>
               )}
             </div>
           );
         })}
-        <div>
-          <button onClick={() => setAllCompleted(true)}>
-            Set All Completed
-          </button>
-          <button onClick={() => setAllCompleted(false)}>
-            Set All Uncompleted
-          </button>
-        </div>
       </main>
     </div>
   );
