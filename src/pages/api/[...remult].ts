@@ -5,6 +5,7 @@ import { findUserById } from "./auth/[...nextauth]";
 import { getToken } from "next-auth/jwt";
 import { DataProviderLiveQueryStorage } from "remult/server";
 import { School } from "../../shared/School";
+import { Work } from "../../shared/Work";
 import { createPostgresConnection } from "remult/postgres";
 
 const dataProvider = createPostgresConnection();
@@ -18,5 +19,5 @@ export default remultNext({
 });
 
 export const api = remultNext({
-  entities: [School],
+  entities: [School, Work],
 });

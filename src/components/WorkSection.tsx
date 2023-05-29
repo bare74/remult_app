@@ -1,4 +1,4 @@
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { remult, UserInfo } from "remult";
 import { Work } from "../shared/Work";
 import ably from "ably/promises";
