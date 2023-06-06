@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Schools from "@/components/Schools";
+import Works from "@/components/Works";
 
 const Home: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ const Home: React.FC = () => {
       </Link>
       <div>
         <Schools />
+        <Works />
       </div>
     </div>
   );

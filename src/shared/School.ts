@@ -21,8 +21,8 @@ export class School {
   occupation = "";
 
   @Fields.date()
-  fromDate?: Date;
+  fromdate?: Date;
 
   @Fields.date()
-  toDate?: Date;
+  todate?: Date;
 }

@@ -23,10 +23,10 @@ export default function Home() {
       const newWork = await workRepo.insert([
         {
           title: newWorkTitle,
-          workPlace: newWorkPlace,
+          workplace: newWorkPlace,
           text: newWorkText,
-          fromDate: new Date(newWorkFromDate),
-          toDate: new Date(newWorkToDate),
+          fromdate: new Date(newWorkFromDate),
+          todate: new Date(newWorkToDate),
         },
       ]);
       // Reset state variables
@@ -97,7 +97,7 @@ export default function Home() {
           <form onSubmit={addWork}>
             <input
               value={newWorkPlace}
-              placeholder="Work"
+              placeholder="Workplace"
               onChange={(e) => setNewWorkPlace(e.target.value)}
             />
             <input
@@ -105,6 +105,7 @@ export default function Home() {
               placeholder="Title"
               onChange={(e) => setNewWorkTitle(e.target.value)}
             />
+
             <input
               value={newWorkText}
               placeholder="Text"
@@ -131,24 +132,28 @@ export default function Home() {
             );
 
           const setTitle = (title: string) => setWork({ ...work, title });
-          const setWorkPlace = (workPlace: string) =>
-            setWork({ ...work, workPlace });
+
+          const setWorkPlace = (workplace: string) =>
+            setWork({ ...work, workplace });
+
           const setText = (text: string) => setWork({ ...work, text });
-          const setFromDate = (fromDate: string) =>
-            setWork({ ...work, fromDate: new Date(fromDate) });
-          const setToDate = (toDate: string) =>
-            setWork({ ...work, toDate: new Date(toDate) });
+
+          const setFromDate = (fromdate: string) =>
+            setWork({ ...work, fromdate: new Date(fromdate) });
+
+          const setToDate = (todate: string) =>
+            setWork({ ...work, todate: new Date(todate) });
 
           const saveWork = async () => {
             try {
-              const { id, title, workPlace, text, fromDate, toDate } = work;
+              const { id, title, workplace, text, fromdate, todate } = work;
               const updatedWork = {
                 id,
+                workplace,
                 title,
-                workPlace,
                 text,
-                fromDate,
-                toDate,
+                fromdate,
+                todate,
                 completed: true,
               };
               await workRepo.update(id, updatedWork);
@@ -169,13 +174,14 @@ export default function Home() {
           return (
             <div key={work.id}>
               <input
+                value={work.workplace}
+                onChange={(e) => setWorkPlace(e.target.value)}
+              />
+              <input
                 value={work.title}
                 onChange={(e) => setTitle(e.target.value)}
               />
-              <input
-                value={work.workPlace}
-                onChange={(e) => setWorkPlace(e.target.value)}
-              />
+
               <input
                 value={work.text}
                 onChange={(e) => setText(e.target.value)}
@@ -183,14 +189,14 @@ export default function Home() {
               <input
                 type="date"
                 value={
-                  work.fromDate ? work.fromDate.toISOString().split("T")[0] : ""
+                  work.fromdate ? work.fromdate.toISOString().split("T")[0] : ""
                 }
                 onChange={(e) => setFromDate(e.target.value)}
               />
               <input
                 type="date"
                 value={
-                  work.toDate ? work.toDate.toISOString().split("T")[0] : ""
+                  work.todate ? work.todate.toISOString().split("T")[0] : ""
                 }
                 onChange={(e) => setToDate(e.target.value)}
               />

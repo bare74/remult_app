@@ -47,20 +47,17 @@
 // component/Schools.tsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+
 import { School } from "../shared/School";
 
-interface SchoolData extends Omit<School, "id"> {
-  id: string;
-}
-
-const Schools: React.FC = () => {
-  const [data, setData] = useState<SchoolData[]>([]);
+const Schools = () => {
+  const [data, setData] = useState<School[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get<SchoolData[]>(
-          "https://lmquxjoccrmkpaddrjez.supabase.co/rest/v1/schools",
+        const response = await axios.get<School[]>(
+          process.env.NEXT_PUBLIC_API_URL + "/schools",
           {
             headers: {
               apikey: process.env.API_KEY,
@@ -72,7 +69,6 @@ const Schools: React.FC = () => {
         console.error("Error fetching data:", error);
       }
     };
-
     fetchData();
   }, []);
 
@@ -84,8 +80,8 @@ const Schools: React.FC = () => {
           <li key={item.id}>
             <p>Name: {item.name}</p>
             <p>Occupation: {item.occupation}</p>
-            <p>From: {item.fromDate}</p>
-            <p>To: {item.toDate}</p>
+            <p>From: {item.fromdate?.toString()}</p>
+            <p>To: {item.todate?.toString()}</p>
           </li>
         ))}
       </ul>

@@ -18,14 +18,14 @@ export class Work {
   title = "";
 
   @Fields.string()
-  workPlace = "";
+  workplace = "";
 
   @Fields.string()
   text = "";
 
   @Fields.date()
-  fromDate?: Date;
+  fromdate?: Date;
 
   @Fields.date()
-  toDate?: Date;
+  todate?: Date;
 }

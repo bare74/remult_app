@@ -24,8 +24,8 @@ export default function Home() {
         {
           name: newSchoolName,
           occupation: newSchoolOccupation,
-          fromDate: new Date(newSchoolFromDate),
-          toDate: new Date(newSchoolToDate),
+          fromdate: new Date(newSchoolFromDate),
+          todate: new Date(newSchoolToDate),
         },
       ]);
       setNewSchoolName("");
@@ -126,20 +126,20 @@ export default function Home() {
           const setOccupation = (occupation: string) =>
             setSchool({ ...school, occupation });
           const setFromDate = (fromDate: string) =>
-            setSchool({ ...school, fromDate: new Date(fromDate) });
+            setSchool({ ...school, fromdate: new Date(fromDate) });
 
           const setToDate = (toDate: string) =>
-            setSchool({ ...school, toDate: new Date(toDate) });
+            setSchool({ ...school, todate: new Date(toDate) });
 
           const saveSchool = async () => {
             try {
-              const { id, name, occupation, fromDate, toDate } = school;
+              const { id, name, occupation, fromdate, todate } = school;
               const updatedSchool = {
                 id,
                 name,
                 occupation,
-                fromDate,
-                toDate,
+                fromdate,
+                todate,
                 completed: true, // Add the completed property if it's appropriate for your use case
               };
               await schoolRepo.update(id, updatedSchool);
@@ -170,8 +170,8 @@ export default function Home() {
               <input
                 type="date"
                 value={
-                  school.fromDate
-                    ? school.fromDate.toISOString().split("T")[0]
+                  school.fromdate
+                    ? school.fromdate.toISOString().split("T")[0]
                     : ""
                 }
                 onChange={(e) => setFromDate(e.target.value)}
@@ -179,7 +179,7 @@ export default function Home() {
               <input
                 type="date"
                 value={
-                  school.toDate ? school.toDate.toISOString().split("T")[0] : ""
+                  school.todate ? school.todate.toISOString().split("T")[0] : ""
                 }
                 onChange={(e) => setToDate(e.target.value)}
               />
