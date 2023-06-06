@@ -12,7 +12,7 @@ const Works = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get<Work[]>(
-          "https://lmquxjoccrmkpaddrjez.supabase.co/rest/v1/works",
+          process.env.NEXT_PUBLIC_API_URL + "/works",
           {
             headers: {
               apikey: process.env.API_KEY,

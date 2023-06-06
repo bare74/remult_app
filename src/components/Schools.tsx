@@ -57,7 +57,7 @@ const Schools = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get<School[]>(
-          "https://lmquxjoccrmkpaddrjez.supabase.co/rest/v1/schools",
+          process.env.NEXT_PUBLIC_API_URL + "/schools",
           {
             headers: {
               apikey: process.env.API_KEY,
