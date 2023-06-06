@@ -6,6 +6,7 @@ body {
     overflow-x: hidden;
     margin: 0;
     font-family: "Euclid Circular A", "Poppins";
+    background-color: black;
 }
 
 .banner {
@@ -50,10 +51,14 @@ main {
     font-size: 30px;
 }
 
-main p {
+main p,
+h1,
+h2,
+h3 {
     margin: 0 0 60px;
     opacity: 0.6;
     line-height: 1.5;
+    color: white;
 }
 
 .images {
