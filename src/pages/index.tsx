@@ -3,6 +3,7 @@ import Schools from "@/components/Schools";
 import Works from "@/components/Works";
 import React, { useEffect } from "react";
 import { animateImages } from "@/shared/animation";
+import Navbar from "@/components/Navbar";
 
 const Home: React.FC = () => {
   useEffect(() => {
@@ -11,6 +12,7 @@ const Home: React.FC = () => {
 
   return (
     <div>
+      <Navbar />
       <section className="banner">
         <header>
           <div>
