@@ -26,7 +26,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100%;
+    height: 80%;
     width: 100%;
     padding: 0 10%;
     background: rgb(0 0 0 / 30%);
@@ -51,12 +51,12 @@ body {
     color: rgb(255 255 255 / 60%);
 }
 
-main {
+/* main {
     padding: 50px 10%;
     font-size: 30px;
-}
+} */
 
-.navbar,
+
 p,
 main p,
 h1,
@@ -77,12 +77,4 @@ h3 {
     width: 65vw;
     height: auto;
     filter: grayscale(0.86);
-}
-
-.max-w-sm {
-    background-color: red;
-}
-
-.School {
-    padding: 0px;
 }

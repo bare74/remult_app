@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Transition } from "@headlessui/react";
+import { InView } from "react-intersection-observer";
 
 import { School } from "../shared/School";
 
@@ -13,6 +15,8 @@ const formatDate = (date?: string | Date) => {
 
 const Schools = () => {
   const [data, setData] = useState<School[]>([]);
+
+  console.log(data);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,19 +40,56 @@ const Schools = () => {
   return (
     <div>
       <h1>Schools</h1>
-      <ul className="flex flex-wrap justify-between">
-        {data.map((item) => (
-          <li
-            key={item.id}
-            className="max-w-sm p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-          >
-            <p>{item.name}</p>
-            <p>{item.occupation}</p>
-            <p>{formatDate(item.fromdate)}</p>
-            <p>{formatDate(item.todate)}</p>
-          </li>
-        ))}
-      </ul>
+      <div className="flex items-center justify-center">
+        <InView>
+          {({ inView, ref }) => (
+            <ul ref={ref} className="flex flex-wrap justify-between">
+              {data.map((item) => (
+                <li key={item.id}>
+                  <Transition.Root style={{ padding: "10px" }} show={inView}>
+                    <Transition.Child
+                      as="div"
+                      enter="ease-in duration-[1000ms] transition-all"
+                      enterFrom="opacity-0 translate-y-48"
+                      enterTo="opacity-100 translate-y-0"
+                      className="block w-[300px] h-[400px] p-6 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                      style={{
+                        backgroundColor: "rgb(64, 64, 64)",
+                        border: "1px solid rgb(130, 130, 130)",
+                      }}
+                    >
+                      <Transition.Child
+                        as="h3"
+                        enter="ease-in delay-[200ms] duration-[800ms] transition-all"
+                        enterFrom="opacity-0 translate-y-12"
+                        enterTo="opacity-100 translate-y-0"
+                        className="text-3xl font-bold"
+                      >
+                        {item.name}
+                      </Transition.Child>
+                      <Transition.Child
+                        as="div" // Change <p> to <div> here
+                        className="text-gray-300"
+                        enter="ease-in delay-[800ms] duration-[600ms] transition-all"
+                        enterFrom="opacity-0 translate-y-12"
+                        enterTo="opacity-100 translate-y-0"
+                      >
+                        <ul>
+                          <li> {item.occupation}</li>
+                          <li>
+                            {formatDate(item.fromdate)} -{" "}
+                            {formatDate(item.todate)}
+                          </li>
+                        </ul>
+                      </Transition.Child>
+                    </Transition.Child>
+                  </Transition.Root>
+                </li>
+              ))}
+            </ul>
+          )}
+        </InView>
+      </div>
     </div>
   );
 };
