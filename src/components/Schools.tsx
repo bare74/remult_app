@@ -3,6 +3,14 @@ import axios from "axios";
 
 import { School } from "../shared/School";
 
+const formatDate = (date?: string | Date) => {
+  if (!date) {
+    return "";
+  }
+  const dateObj = typeof date === "string" ? new Date(date) : date;
+  return dateObj.toLocaleDateString("no-NO");
+};
+
 const Schools = () => {
   const [data, setData] = useState<School[]>([]);
 
@@ -28,13 +36,16 @@ const Schools = () => {
   return (
     <div>
       <h1>Schools</h1>
-      <ul>
+      <ul className="flex flex-wrap justify-between">
         {data.map((item) => (
-          <li key={item.id}>
-            <p>Name: {item.name}</p>
-            <p>Occupation: {item.occupation}</p>
-            <p>From: {item.fromdate?.toString()}</p>
-            <p>To: {item.todate?.toString()}</p>
+          <li
+            key={item.id}
+            className="max-w-sm p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          >
+            <p>{item.name}</p>
+            <p>{item.occupation}</p>
+            <p>{formatDate(item.fromdate)}</p>
+            <p>{formatDate(item.todate)}</p>
           </li>
         ))}
       </ul>

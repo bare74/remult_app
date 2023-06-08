@@ -78,3 +78,11 @@ h3 {
     height: auto;
     filter: grayscale(0.86);
 }
+
+.max-w-sm {
+    background-color: red;
+}
+
+.School {
+    padding: 0px;
+}

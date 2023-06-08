@@ -3,10 +3,16 @@ import axios from "axios";
 
 import { Work } from "../shared/Work";
 
+const formatDate = (date?: string | Date) => {
+  if (!date) {
+    return "";
+  }
+  const dateObj = typeof date === "string" ? new Date(date) : date;
+  return dateObj.toLocaleDateString("no-NO");
+};
+
 const Works = () => {
   const [data, setData] = useState<Work[]>([]);
-
-  console.log(data);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,14 +36,19 @@ const Works = () => {
   return (
     <div>
       <h1>Works</h1>
-      <ul>
+      <ul className="flex flex-wrap justify-between">
         {data.map((item) => (
-          <li key={item.id}>
-            <p>workplace: {item.workplace}</p>
-            <p>Title: {item.title}</p>
-            <p>Text: {item.text}</p>
-            <p>From: {item.fromdate?.toString()}</p>
-            <p>To: {item.todate?.toString()}</p>
+          <li
+            key={item.id}
+            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-6 mb-4"
+          >
+            <div className="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 h-full">
+              <p>{item.workplace}</p>
+              <p>{item.title}</p>
+              <p>{item.text}</p>
+              <p>{formatDate(item.fromdate)}</p>
+              <p>{formatDate(item.todate)}</p>
+            </div>
           </li>
         ))}
       </ul>

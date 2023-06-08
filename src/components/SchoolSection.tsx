@@ -88,7 +88,7 @@ export default function Home() {
     return <div>Loading...</div>; // Display a loading message or spinner
   }
   return (
-    <div>
+    <div className="School">
       <main>
         {schoolRepo.metadata.apiInsertAllowed() && (
           <form onSubmit={addSchool}>
