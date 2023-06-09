@@ -63,8 +63,10 @@ h2,
 h3 {
     margin: 0 0 60px;
     opacity: 0.6;
+
+
     line-height: 1.5;
-    /* color: white; */
+
 }
 
 .images {
@@ -97,4 +99,38 @@ button {
     padding: 10px;
     display: flex;
     justify-content: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .banner>header {
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        padding: 20px;
+    }
+
+    .banner>header img {
+        width: 200px;
+        height: 200px;
+        margin-top: 20px;
+    }
+
+    .banner h2 {
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .banner h3 {
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .Container {
+        padding: 20px;
+    }
+
+    button {
+        padding: 10px;
+    }
 }
