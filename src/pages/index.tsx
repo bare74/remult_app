@@ -31,6 +31,8 @@ const Home: React.FC = () => {
       <main>
         <div className="Container">
           <Schools />
+        </div>
+        <div className="Container">
           <Works />
         </div>
 

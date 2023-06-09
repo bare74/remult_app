@@ -39,7 +39,6 @@ const Schools = () => {
 
   return (
     <div>
-      <h1>Schools</h1>
       <div className="flex items-center justify-center">
         <InView>
           {({ inView, ref }) => (
@@ -56,8 +55,11 @@ const Schools = () => {
                       style={{
                         backgroundColor: "rgb(64, 64, 64)",
                         border: "1px solid rgb(130, 130, 130)",
+                        textAlign: "center",
                       }}
                     >
+                      {" "}
+                      <h3>Schools</h3>
                       <Transition.Child
                         as="h3"
                         enter="ease-in delay-[200ms] duration-[800ms] transition-all"

@@ -91,7 +91,7 @@ export default function Home() {
     return <div>Loading...</div>; // Display a loading message or spinner
   }
   return (
-    <div>
+    <div className="SchoolWork">
       <main>
         {workRepo.metadata.apiInsertAllowed() && (
           <form onSubmit={addWork}>
@@ -200,9 +200,19 @@ export default function Home() {
                 }
                 onChange={(e) => setToDate(e.target.value)}
               />
-              <button onClick={saveWork}>Save</button>
+              <button
+                onClick={saveWork}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Save
+              </button>
               {workRepo.metadata.apiDeleteAllowed(work) && (
-                <button onClick={deleteWork}>Delete</button>
+                <button
+                  onClick={deleteWork}
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  Delete
+                </button>
               )}
             </div>
           );

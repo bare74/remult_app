@@ -87,7 +87,12 @@ export default function Edit() {
         <main>
           <div>
             Hello {remult.user?.name}
-            <button onClick={() => signOut()}>Sign Out</button>
+            <button
+              onClick={() => signOut()}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Sign Out
+            </button>
           </div>
 
           <SchoolSection />
