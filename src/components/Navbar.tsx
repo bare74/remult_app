@@ -20,7 +20,7 @@ export default function Home() {
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
               <a href="#">
-                <h2 className="text-2xl text-black font-bold">NEXT JS</h2>
+                <h2 className="text-2xl text-black font-bold"></h2>
               </a>
               <div className="md:hidden">
                 <button
@@ -62,19 +62,14 @@ export default function Home() {
           </div>
           <div className="navBar">
             <div
-              className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
+              className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-8 ${
                 navbar ? "block" : "hidden"
               }`}
             >
               <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
                 <li className="text-black">
                   <Link href="/">
-                    <p>Home</p>
-                  </Link>
-                </li>
-                <li className="text-black">
-                  <Link href="/blogs">
-                    <p>Blogs</p>
+                    <p>Hjem</p>
                   </Link>
                 </li>
                 <li className="text-black">
@@ -84,12 +79,7 @@ export default function Home() {
                 </li>
                 <li className="text-black">
                   <Link href="/contact">
-                    <p>Contact US</p>
-                  </Link>
-                </li>
-                <li className="text-black">
-                  <Link href="/contact">
-                    <p>Contact US</p>
+                    <p>Kontakt meg</p>
                   </Link>
                 </li>
               </ul>
