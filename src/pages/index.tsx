@@ -12,8 +12,8 @@ const Home: React.FC = () => {
 
   return (
     <div>
+      <Navbar />
       <section className="banner">
-        <Navbar />
         <header>
           <div>
             <h2>Bjørn Are Nielsen</h2>
@@ -29,10 +29,8 @@ const Home: React.FC = () => {
       </section>
 
       <main>
-        <div>
+        <div className="Container">
           <Schools />
-        </div>
-        <div>
           <Works />
         </div>
 

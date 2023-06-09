@@ -57,7 +57,7 @@ body {
 } */
 
 
-p,
+
 main p,
 h1,
 h2,
@@ -77,4 +77,9 @@ h3 {
     width: 65vw;
     height: auto;
     filter: grayscale(0.86);
+}
+
+.Container {
+
+    background-color: white;
 }

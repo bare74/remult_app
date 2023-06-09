@@ -65,7 +65,7 @@ const Schools = () => {
                         enterTo="opacity-100 translate-y-0"
                         className="text-3xl font-bold"
                       >
-                        {item.name}
+                        {item.occupation}
                       </Transition.Child>
                       <Transition.Child
                         as="div" // Change <p> to <div> here
@@ -75,7 +75,7 @@ const Schools = () => {
                         enterTo="opacity-100 translate-y-0"
                       >
                         <ul>
-                          <li> {item.occupation}</li>
+                          <li> {item.name}</li>
                           <li>
                             {formatDate(item.fromdate)} -{" "}
                             {formatDate(item.todate)}

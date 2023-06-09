@@ -15,22 +15,22 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <nav className="w-full bg-black-800 shadow">
+      <nav className="w-full bg-white shadow">
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
               <a href="#">
-                <h2 className="text-2xl text-white font-bold">NEXT JS</h2>
+                <h2 className="text-2xl text-black font-bold">NEXT JS</h2>
               </a>
               <div className="md:hidden">
                 <button
-                  className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
+                  className="p-2 text-black rounded-md outline-none focus:border-gray-400 focus:border"
                   onClick={() => setNavbar(!navbar)}
                 >
                   {navbar ? (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="w-6 h-6 text-white"
+                      className="w-6 h-6 text-black"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
@@ -43,7 +43,7 @@ export default function Home() {
                   ) : (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="w-6 h-6 text-white"
+                      className="w-6 h-6 text-black"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -67,27 +67,27 @@ export default function Home() {
               }`}
             >
               <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                <li className="text-white">
+                <li className="text-black">
                   <Link href="/">
                     <p>Home</p>
                   </Link>
                 </li>
-                <li className="text-white">
+                <li className="text-black">
                   <Link href="/blogs">
                     <p>Blogs</p>
                   </Link>
                 </li>
-                <li className="text-white">
+                <li className="text-black">
                   <Link href="/edit">
                     <p>Login</p>
                   </Link>
                 </li>
-                <li className="text-white">
+                <li className="text-black">
                   <Link href="/contact">
                     <p>Contact US</p>
                   </Link>
                 </li>
-                <li className="text-white">
+                <li className="text-black">
                   <Link href="/contact">
                     <p>Contact US</p>
                   </Link>
