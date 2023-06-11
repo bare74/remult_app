@@ -13,6 +13,10 @@ body {
     font-family: "Euclid Circular A", "Poppins";
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 .banner {
     position: relative;
 }
@@ -83,7 +87,9 @@ h3 {
 .Container {
 
     background-color: white;
-    padding: 80px;
+    margin: auto;
+    padding: 100px;
+
 }
 
 .text-3xl {

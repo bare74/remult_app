@@ -67,17 +67,22 @@ export default function Home() {
               }`}
             >
               <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                <li className="text-black">
+                <li className="text-blacl font-bold">
                   <Link href="/">
                     <p>Hjem</p>
                   </Link>
                 </li>
-                <li className="text-black">
+                <li className="text-blacl font-bold">
+                  <Link href="/">
+                    <p>About</p>
+                  </Link>
+                </li>
+                <li className="text-blacl font-bold">
                   <Link href="/edit">
                     <p>Login</p>
                   </Link>
                 </li>
-                <li className="text-black">
+                <li className="text-blacl font-bold">
                   <Link href="/contact">
                     <p>Kontakt meg</p>
                   </Link>

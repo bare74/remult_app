@@ -7,6 +7,7 @@ import ably from "ably/promises";
 import { AblySubscriptionClient } from "remult/ably";
 import SchoolSection from "../components/SchoolSection";
 import WorkSection from "../components/WorkSection";
+import Navbar from "../components/Navbar";
 
 const schoolRepo = remult.repo(School);
 const workRepo = remult.repo(Work);
@@ -92,6 +93,7 @@ export default function Edit() {
 
   return (
     <div>
+      <Navbar />
       <div>
         <h1>Schools</h1>
         <main>
