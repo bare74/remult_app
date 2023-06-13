@@ -185,14 +185,14 @@ export default function Home() {
               />
               <button
                 onClick={saveSchool}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2"
               >
                 Save
               </button>
               {schoolRepo.metadata.apiDeleteAllowed(school) && (
                 <button
                   onClick={deleteSchool}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2"
                 >
                   Delete
                 </button>
