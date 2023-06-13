@@ -94,27 +94,20 @@ export default function Edit() {
   return (
     <div>
       <Navbar />
-      <div>
-        <h1>Schools</h1>
-        <main>
-          <div>
-            Hello {remult.user?.name}
-            <button
-              onClick={() => signOut()}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Sign Out
-            </button>
-          </div>
-
+      <div className="flex justify-center items-center">
+        <div className="flex flex-col items-center">
+          <h1>Schools</h1>
+          Hello {remult.user?.name}
+          <button
+            onClick={() => signOut()}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Sign Out
+          </button>
           <SchoolSection />
-        </main>
-      </div>
-      <div>
-        <h1>Works</h1>
-        <main>
+          <h1>Works</h1>
           <WorkSection />
-        </main>
+        </div>
       </div>
     </div>
   );

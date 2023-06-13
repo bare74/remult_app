@@ -92,6 +92,13 @@ h3 {
 
 }
 
+input {
+
+    padding: 10px;
+    width: 280px;
+
+}
+
 .text-3xl {
     opacity: 0.6;
     color: white;
