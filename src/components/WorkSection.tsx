@@ -96,32 +96,39 @@ export default function Home() {
         {workRepo.metadata.apiInsertAllowed() && (
           <form onSubmit={addWork}>
             <input
+              className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
               value={newWorkPlace}
               placeholder="Workplace"
               onChange={(e) => setNewWorkPlace(e.target.value)}
             />
             <input
+              className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
               value={newWorkTitle}
               placeholder="Title"
               onChange={(e) => setNewWorkTitle(e.target.value)}
             />
 
             <input
+              className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
               value={newWorkText}
               placeholder="Text"
               onChange={(e) => setNewWorkText(e.target.value)}
             />
             <input
+              className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
               type="date"
               value={newWorkFromDate}
               onChange={(e) => setNewWorkFromDate(e.target.value)}
             />
             <input
+              className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
               type="date"
               value={newWorkToDate}
               onChange={(e) => setNewWorkToDate(e.target.value)}
             />
-            <button>Add</button>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">
+              Add
+            </button>
           </form>
         )}
 
@@ -174,19 +181,23 @@ export default function Home() {
           return (
             <div key={work.id}>
               <input
+                className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
                 value={work.workplace}
                 onChange={(e) => setWorkPlace(e.target.value)}
               />
               <input
+                className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
                 value={work.title}
                 onChange={(e) => setTitle(e.target.value)}
               />
 
               <input
+                className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
                 value={work.text}
                 onChange={(e) => setText(e.target.value)}
               />
               <input
+                className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
                 type="date"
                 value={
                   work.fromdate ? work.fromdate.toISOString().split("T")[0] : ""
@@ -194,6 +205,7 @@ export default function Home() {
                 onChange={(e) => setFromDate(e.target.value)}
               />
               <input
+                className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
                 type="date"
                 value={
                   work.todate ? work.todate.toISOString().split("T")[0] : ""

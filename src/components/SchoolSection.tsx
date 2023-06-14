@@ -93,26 +93,32 @@ export default function Home() {
         {schoolRepo.metadata.apiInsertAllowed() && (
           <form onSubmit={addSchool}>
             <input
+              className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
               value={newSchoolName}
               placeholder="School Name"
               onChange={(e) => setNewSchoolName(e.target.value)}
             />
             <input
+              className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
               value={newSchoolOccupation}
               placeholder="Occupation"
               onChange={(e) => setNewSchoolOccupation(e.target.value)}
             />
             <input
+              className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
               type="date"
               value={newSchoolFromDate}
               onChange={(e) => setNewSchoolFromDate(e.target.value)}
             />
             <input
+              className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
               type="date"
               value={newSchoolToDate}
               onChange={(e) => setNewSchoolToDate(e.target.value)}
             />
-            <button>Add</button>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">
+              Add
+            </button>
           </form>
         )}
 
@@ -160,14 +166,16 @@ export default function Home() {
           return (
             <div key={school.id}>
               <input
-                value={school.name}
+                className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
                 onChange={(e) => setName(e.target.value)}
               />
               <input
+                className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
                 value={school.occupation}
                 onChange={(e) => setOccupation(e.target.value)}
               />
               <input
+                className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
                 type="date"
                 value={
                   school.fromdate
@@ -177,6 +185,7 @@ export default function Home() {
                 onChange={(e) => setFromDate(e.target.value)}
               />
               <input
+                className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
                 type="date"
                 value={
                   school.todate ? school.todate.toISOString().split("T")[0] : ""

@@ -54,10 +54,6 @@ html {
     color: rgb(255 255 255 / 60%);
 }
 
-/* main {
-    padding: 50px 10%;
-    font-size: 30px;
-} */
 
 
 p,
@@ -67,8 +63,6 @@ h2,
 h3 {
     margin: 0 0 60px;
     opacity: 0.6;
-
-
     line-height: 1.5;
 
 }
@@ -92,27 +86,15 @@ h3 {
 
 }
 
-input {
-
-    padding: 10px;
-    width: 280px;
-
-}
 
 .text-3xl {
     opacity: 0.6;
     color: white;
 }
 
-button {
-    padding: 20px;
-}
 
-.SchoolWork {
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-}
+
+
 
 /* Responsive Styles */
 @media (max-width: 768px) {
