@@ -96,14 +96,14 @@ export default function Edit() {
       <Navbar />
       <div className="flex justify-center items-center">
         <div className="flex flex-col items-center">
-          <h1>Schools</h1>
-          Hello {remult.user?.name}
+          Hei: {remult.user?.name}
           <button
             onClick={() => signOut()}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2"
           >
             Sign Out
           </button>
+          <h1>Schools</h1>
           <SchoolSection />
           <h1>Works</h1>
           <WorkSection />
