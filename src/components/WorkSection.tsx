@@ -91,27 +91,27 @@ export default function Home() {
     return <div>Loading...</div>; // Display a loading message or spinner
   }
   return (
-    <div className="SchoolWork">
+    <div className="Work">
       <main>
         {workRepo.metadata.apiInsertAllowed() && (
           <form onSubmit={addWork}>
             <input
               className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
               value={newWorkPlace}
-              placeholder="Workplace"
+              placeholder="Jobb"
               onChange={(e) => setNewWorkPlace(e.target.value)}
             />
             <input
               className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
               value={newWorkTitle}
-              placeholder="Title"
+              placeholder="Tittel"
               onChange={(e) => setNewWorkTitle(e.target.value)}
             />
 
             <input
               className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
               value={newWorkText}
-              placeholder="Text"
+              placeholder="Arbeids beskrivelse"
               onChange={(e) => setNewWorkText(e.target.value)}
             />
             <input

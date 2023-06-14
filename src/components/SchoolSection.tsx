@@ -88,20 +88,20 @@ export default function Home() {
     return <div>Loading...</div>; // Display a loading message or spinner
   }
   return (
-    <div className="SchoolWork">
+    <div className="School">
       <main>
         {schoolRepo.metadata.apiInsertAllowed() && (
           <form onSubmit={addSchool}>
             <input
               className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
               value={newSchoolName}
-              placeholder="School Name"
+              placeholder="Skole"
               onChange={(e) => setNewSchoolName(e.target.value)}
             />
             <input
               className=" px-4 h-10 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
               value={newSchoolOccupation}
-              placeholder="Occupation"
+              placeholder="Linje"
               onChange={(e) => setNewSchoolOccupation(e.target.value)}
             />
             <input
